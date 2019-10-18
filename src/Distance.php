@@ -2,8 +2,6 @@
 
 namespace Katsana\Metric;
 
-use InvalidArgumentException;
-
 class Distance extends Metric
 {
     /**
@@ -42,7 +40,8 @@ class Distance extends Metric
     /**
      * Convert to Speed with new format.
      *
-     * @param  string $format
+     * @param string $format
+     *
      * @return static
      */
     public function to(string $format = 'km')

@@ -2,8 +2,6 @@
 
 namespace Katsana\Metric;
 
-use InvalidArgumentException;
-
 class Speed extends Metric
 {
     /**
@@ -29,7 +27,7 @@ class Speed extends Metric
     /**
      * Construct a new Speed.
      *
-     * @param float $value
+     * @param float  $value
      * @param string $format
      */
     public function __construct(float $value, string $format = 'kn')
@@ -43,7 +41,8 @@ class Speed extends Metric
     /**
      * Convert to Speed with new format.
      *
-     * @param  string $format
+     * @param string $format
+     *
      * @return static
      */
     public function to(string $format = 'kmh')

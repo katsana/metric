@@ -28,9 +28,11 @@ abstract class Metric
     /**
      * Convert to humanize.
      *
-     * @param  string|null $format
-     * @return float
+     * @param string|null $format
+     *
      * @throws \InvalidArgumentException
+     *
+     * @return float
      */
     public function humanize(?string $format = null): float
     {
@@ -52,7 +54,8 @@ abstract class Metric
     /**
      * Convert to new format.
      *
-     * @param  string $format
+     * @param string $format
+     *
      * @return static
      */
     abstract public function to(string $format);
@@ -60,9 +63,10 @@ abstract class Metric
     /**
      * Convert value to.
      *
-     * @param  float|int $value
-     * @param  string $format
-     * @param  string $type
+     * @param float|int $value
+     * @param string    $format
+     * @param string    $type
+     *
      * @return float|int
      */
     protected function convertTo($value, string $format, string $type = 'from')
