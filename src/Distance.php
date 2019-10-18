@@ -4,23 +4,52 @@ namespace Katsana\Metric;
 
 use InvalidArgumentException;
 
-class Distance
+class Distance extends Metric
 {
     /**
-     * Speed value in METER.
+     * List of supported formats.
      *
-     * @var int
+     * @var array
      */
-    protected $value;
+    protected $supportedFormats = [
+        'm' => [
+            'from' => 1,
+            'to' => 1,
+        ],
+        'km' => [
+            'from' => 0.001,
+            'to' => 1000.0,
+        ],
+        'mi' => [
+            'from' => 0.000621371,
+            'to' => 1609.34,
+        ],
+    ];
 
     /**
      * Construct a new Speed from METER.
      *
-     * @param int $value
+     * @param float $value
      */
-    public function __construct(int $value)
+    public function __construct(float $value, string $format = 'm')
     {
-        $this->value = $value;
+        $value = \is_numeric($value) ? $value : 0;
+
+        $this->format = $format;
+        $this->value = $this->convertTo($value, $format, 'to');
+    }
+
+    /**
+     * Convert to Speed with new format.
+     *
+     * @param  string $format
+     * @return static
+     */
+    public function to(string $format = 'km')
+    {
+        return new static(
+            $this->convertTo($this->value, $format, 'from'), $format
+        );
     }
 
     /**
@@ -32,15 +61,8 @@ class Distance
      */
     public function humanize(string $format = 'km'): float
     {
-        $value = \is_numeric($this->value) ? $this->value : 0;
-
-        switch ($format) {
-            case 'km':
-                return \round($value * 0.001, 2);
-            case 'mi':
-                return \round($value * 0.000621371, 2);
-            default:
-                throw new InvalidArgumentException("Unvalid given {$format} format.");
-        }
+        return \round(
+            $this->convertTo($this->value, $format, 'from'), 2
+        );
     }
 }

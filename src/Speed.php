@@ -4,23 +4,53 @@ namespace Katsana\Metric;
 
 use InvalidArgumentException;
 
-class Speed
+class Speed extends Metric
 {
     /**
-     * Speed value in KNOT.
+     * List of supported formats.
      *
-     * @var float
+     * @var array
      */
-    protected $value;
+    protected $supportedFormats = [
+        'kn' => [
+            'from' => 1,
+            'to' => 1,
+        ],
+        'kmh' => [
+            'from' => 1.85200,
+            'to' => 0.539957,
+        ],
+        'mph' => [
+            'from' => 1.15078,
+            'to' => 0.868976,
+        ],
+    ];
 
     /**
-     * Construct a new Speed from KNOT.
+     * Construct a new Speed.
      *
      * @param float $value
+     * @param string $format
      */
-    public function __construct(float $value)
+    public function __construct(float $value, string $format = 'kn')
     {
-        $this->value = $value;
+        $value = \is_numeric($value) ? $value : 0;
+
+        $this->format = $format;
+        $this->value = $this->convertTo($value, $format, 'to');
+    }
+
+    /**
+     * Convert to Speed with new format.
+     *
+     * @param  string $format
+     * @return static
+     */
+    public function to(string $format = 'kmh')
+    {
+        return new static(
+            $this->convertTo($this->value, $format, 'from'), $format
+        );
     }
 
     /**
@@ -32,15 +62,8 @@ class Speed
      */
     public function humanize(string $format = 'kmh'): float
     {
-        $value = \is_numeric($this->value) ? $this->value : 0;
-
-        switch ($format) {
-            case 'kmh':
-                return \round($value * 1.85200, 2);
-            case 'mph':
-                return \round($value * 1.15078, 2);
-            default:
-                throw new InvalidArgumentException("Unvalid given {$format} format.");
-        }
+        return \round(
+            $this->convertTo($this->value, $format, 'from'), 2
+        );
     }
 }
