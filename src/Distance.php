@@ -4,21 +4,21 @@ namespace Katsana\Metric;
 
 use InvalidArgumentException;
 
-class Speed
+class Distance
 {
     /**
-     * Speed value in KNOT.
+     * Speed value in METER.
      *
-     * @var float
+     * @var int
      */
     protected $value;
 
     /**
-     * Construct a new Speed from KNOT.
+     * Construct a new Speed from METER.
      *
-     * @param float $value
+     * @param int $value
      */
-    public function __construct(float $value)
+    public function __construct(int $value)
     {
         $this->value = $value;
     }
@@ -30,15 +30,15 @@ class Speed
      * @return float
      * @throws \InvalidArgumentException
      */
-    public function humanize(string $format = 'kmh'): float
+    public function humanize(string $format = 'km'): float
     {
         $value = \is_numeric($this->value) ? $this->value : 0;
 
         switch ($format) {
-            case 'kmh':
-                return \round($value * 1.85200, 2);
-            case 'mph':
-                return \round($value * 1.15078, 2);
+            case 'km':
+                return \round($value * 0.001, 2);
+            case 'mi':
+                return \round($value * 0.000621371, 2);
             default:
                 throw new InvalidArgumentException("Unvalid given {$format} format.");
         }
