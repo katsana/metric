@@ -19,10 +19,10 @@ class SpeedTest extends TestCase
     /** @test */
     public function it_can_convert_speed_from_knot_to_kmh()
     {
-        $this->assertSame(111.12, (new Speed(60))->humanize());
-        $this->assertSame(126.16, (new Speed(68.12))->humanize());
-        $this->assertSame(2.22, (new Speed(1.2))->humanize());
-        $this->assertSame(0.0, (new Speed(0))->humanize());
+        $this->assertSame(111.12, (new Speed(60))->humanize('kmh'));
+        $this->assertSame(126.16, (new Speed(68.12))->humanize('kmh'));
+        $this->assertSame(2.22, (new Speed(1.2))->humanize('kmh'));
+        $this->assertSame(0.0, (new Speed(0))->humanize('kmh'));
     }
 
     /** @test */

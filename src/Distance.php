@@ -51,18 +51,4 @@ class Distance extends Metric
             $this->convertTo($this->value, $format, 'from'), $format
         );
     }
-
-    /**
-     * Convert to humanize.
-     *
-     * @param  string $format
-     * @return float
-     * @throws \InvalidArgumentException
-     */
-    public function humanize(string $format = 'km'): float
-    {
-        return \round(
-            $this->convertTo($this->value, $format, 'from'), 2
-        );
-    }
 }

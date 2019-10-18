@@ -26,13 +26,27 @@ abstract class Metric
     protected $supportedFormats = [];
 
     /**
+     * Convert to humanize.
+     *
+     * @param  string|null $format
+     * @return float
+     * @throws \InvalidArgumentException
+     */
+    public function humanize(?string $format = null): float
+    {
+        return \round(
+            $this->convertTo($this->value, $format ?? $this->format, 'from'), 2
+        );
+    }
+
+    /**
      * Format as string.
      *
      * @return string
      */
     public function __toString()
     {
-        return \number_format($this->humanize($this->format), 0, '.', ',');
+        return \number_format($this->humanize(), 0, '.', ',');
     }
 
     /**
@@ -42,16 +56,6 @@ abstract class Metric
      * @return static
      */
     abstract public function to(string $format);
-
-    /**
-     * Convert to humanize.
-     *
-     * @param  string $format
-     * @return float|int
-     *
-     * @throws \InvalidArgumentException
-     */
-    abstract public function humanize(string $format);
 
     /**
      * Convert value to.
