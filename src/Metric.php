@@ -2,6 +2,8 @@
 
 namespace Katsana\Metric;
 
+use InvalidArgumentException;
+
 abstract class Metric
 {
     /**
