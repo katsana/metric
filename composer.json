@@ -1,0 +1,30 @@
+{
+    "name": "katsana/metric",
+    "description": "Metric Helpers for KATSANA",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "KATSANA Developer",
+            "email": "developer@katsana.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.2.3",
+        "phpunit/phpunit": "^8.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Katsana\\Metric\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Katsana\\Metric\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable"
+}
