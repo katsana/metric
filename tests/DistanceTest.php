@@ -42,4 +42,22 @@ class DistanceTest extends TestCase
         $this->assertSame(0.01, (new Distance(12))->to('km')->humanize('mi'));
         $this->assertSame(0.0, (new Distance(0))->to('km')->humanize('mi'));
     }
+    /** @test */
+    public function it_can_serialize_speed()
+    {
+        $this->assertSame(
+            'C:23:"Katsana\Metric\Distance":48:{a:2:{s:5:"value";d:90000;s:6:"format";s:2:"km";}}',
+            \serialize(new Distance(90, 'km'))
+        );
+    }
+
+    /** @test */
+    public function it_can_unserialize_speed()
+    {
+        $distance = \unserialize(
+            'C:23:"Katsana\Metric\Distance":48:{a:2:{s:5:"value";d:90000;s:6:"format";s:2:"km";}}'
+        );
+
+        $this->assertSame(90.0, $distance->humanize());
+    }
 }

@@ -2,9 +2,10 @@
 
 namespace Katsana\Metric;
 
+use Serializable;
 use InvalidArgumentException;
 
-abstract class Metric
+abstract class Metric implements Serializable
 {
     /**
      * Value.
@@ -51,6 +52,34 @@ abstract class Metric
     public function __toString()
     {
         return \number_format($this->humanize(), 0, '.', ',');
+    }
+
+    /**
+     * Serialize instance.
+     *
+     * @return string
+     */
+    public function serialize()
+    {
+        return \serialize([
+            'value' => $this->value,
+            'format' => $this->format,
+        ]);
+    }
+
+    /**
+     * Unserialize instance.
+     *
+     * @param string $data
+     *
+     * @return void
+     */
+    public function unserialize($data)
+    {
+        [
+            'value' => $this->value,
+            'format' => $this->format,
+        ] = \unserialize($data);
     }
 
     /**

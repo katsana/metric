@@ -42,4 +42,23 @@ class SpeedTest extends TestCase
         $this->assertSame(1.38, (new Speed(1.2))->to('kmh')->humanize('mph'));
         $this->assertSame(0.0, (new Speed(0))->to('kmh')->humanize('mph'));
     }
+
+    /** @test */
+    public function it_can_serialize_speed()
+    {
+        $this->assertSame(
+            'C:20:"Katsana\Metric\Speed":52:{a:2:{s:5:"value";d:48.59613;s:6:"format";s:3:"kmh";}}',
+            \serialize(new Speed(90, 'kmh'))
+        );
+    }
+
+    /** @test */
+    public function it_can_unserialize_speed()
+    {
+        $speed = \unserialize(
+            'C:20:"Katsana\Metric\Speed":52:{a:2:{s:5:"value";d:48.59613;s:6:"format";s:3:"kmh";}}'
+        );
+
+        $this->assertSame(90.0, $speed->humanize());
+    }
 }
