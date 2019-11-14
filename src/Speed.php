@@ -27,7 +27,7 @@ class Speed extends Metric
     /**
      * Construct a new Speed.
      */
-    public function __construct(float $value, string $format = 'kn')
+    public function __construct(?float $value, string $format = 'kn')
     {
         $value = \is_numeric($value) ? $value : 0;
 

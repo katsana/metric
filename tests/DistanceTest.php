@@ -14,6 +14,7 @@ class DistanceTest extends TestCase
         $this->assertSame('7', (string) (new Distance(6812))->to('km'));
         $this->assertSame('0', (string) (new Distance(12))->to('km'));
         $this->assertSame('0', (string) (new Distance(0))->to('km'));
+        $this->assertSame('0', (string) (new Distance(null))->to('km'));
     }
 
     /** @test */

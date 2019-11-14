@@ -27,7 +27,7 @@ class Distance extends Metric
     /**
      * Construct a new Speed from METER.
      */
-    public function __construct(float $value, string $format = 'm')
+    public function __construct(?float $value, string $format = 'm')
     {
         $value = \is_numeric($value) ? $value : 0;
 

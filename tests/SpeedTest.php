@@ -14,6 +14,7 @@ class SpeedTest extends TestCase
         $this->assertSame('126', (string) (new Speed(68.12))->to('kmh'));
         $this->assertSame('2', (string) (new Speed(1.2))->to('kmh'));
         $this->assertSame('0', (string) (new Speed(0))->to('kmh'));
+        $this->assertSame('0', (string) (new Speed(null))->to('kmh'));
     }
 
     /** @test */
