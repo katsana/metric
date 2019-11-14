@@ -26,8 +26,6 @@ class Distance extends Metric
 
     /**
      * Construct a new Speed from METER.
-     *
-     * @param float $value
      */
     public function __construct(float $value, string $format = 'm')
     {
@@ -39,8 +37,6 @@ class Distance extends Metric
 
     /**
      * Convert to Speed with new format.
-     *
-     * @param string $format
      *
      * @return static
      */

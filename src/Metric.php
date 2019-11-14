@@ -2,8 +2,8 @@
 
 namespace Katsana\Metric;
 
-use Serializable;
 use InvalidArgumentException;
+use Serializable;
 
 abstract class Metric implements Serializable
 {
@@ -31,11 +31,7 @@ abstract class Metric implements Serializable
     /**
      * Convert to humanize.
      *
-     * @param string|null $format
-     *
      * @throws \InvalidArgumentException
-     *
-     * @return float
      */
     public function humanize(?string $format = null): float
     {
@@ -85,8 +81,6 @@ abstract class Metric implements Serializable
     /**
      * Convert to new format.
      *
-     * @param string $format
-     *
      * @return static
      */
     abstract public function to(string $format);
@@ -95,8 +89,6 @@ abstract class Metric implements Serializable
      * Convert value to.
      *
      * @param float|int $value
-     * @param string    $format
-     * @param string    $type
      *
      * @return float|int
      */

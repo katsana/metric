@@ -42,6 +42,7 @@ class DistanceTest extends TestCase
         $this->assertSame(0.01, (new Distance(12))->to('km')->humanize('mi'));
         $this->assertSame(0.0, (new Distance(0))->to('km')->humanize('mi'));
     }
+
     /** @test */
     public function it_can_serialize_speed()
     {
