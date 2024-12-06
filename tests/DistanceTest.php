@@ -3,6 +3,7 @@
 namespace Katsana\Metric\Tests;
 
 use Katsana\Metric\Distance;
+use Katsana\Metric\Metric;
 use PHPUnit\Framework\TestCase;
 
 class DistanceTest extends TestCase
@@ -47,9 +48,10 @@ class DistanceTest extends TestCase
     /** @test */
     public function it_can_serialize_speed()
     {
+
         $this->assertSame(
-            'C:23:"Katsana\Metric\Distance":48:{a:2:{s:5:"value";d:90000;s:6:"format";s:2:"km";}}',
-            \serialize(new Distance(90, 'km'))
+            'O:23:"Katsana\Metric\Distance":2:{s:5:"value";d:90000;s:6:"format";s:2:"km";}',
+            serialize(new Distance(90, 'km'))
         );
     }
 

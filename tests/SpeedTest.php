@@ -48,7 +48,7 @@ class SpeedTest extends TestCase
     public function it_can_serialize_speed()
     {
         $this->assertSame(
-            'C:20:"Katsana\Metric\Speed":52:{a:2:{s:5:"value";d:48.59613;s:6:"format";s:3:"kmh";}}',
+            'O:20:"Katsana\Metric\Speed":2:{s:5:"value";d:48.59613;s:6:"format";s:3:"kmh";}',
             \serialize(new Speed(90, 'kmh'))
         );
     }
