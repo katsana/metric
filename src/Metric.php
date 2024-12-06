@@ -3,8 +3,9 @@
 namespace Katsana\Metric;
 
 use InvalidArgumentException;
+use Serializable;
 
-abstract class Metric
+abstract class Metric implements Serializable
 {
     /**
      * Value.
@@ -50,9 +51,28 @@ abstract class Metric
     }
 
     /**
-     * Serialize the object to a value that can be serialized natively by json_encode().
-     *
-     * @return array
+     * Serialize the metric object.
+     */
+    public function serialize(): string
+    {
+        return serialize([
+            'value' => $this->value,
+            'format' => $this->format,
+        ]);
+    }
+
+    /**
+     * Unserialize the metric object.
+     */
+    public function unserialize($data): void
+    {
+        $data = unserialize($data);
+        $this->value = $data['value'];
+        $this->format = $data['format'];
+    }
+
+    /**
+     * @deprecated Use serialize() instead
      */
     public function __serialize(): array
     {
@@ -63,30 +83,12 @@ abstract class Metric
     }
 
     /**
-     * Unserialize the object from a value that was serialized by json_encode().
-     *
-     * @param array $data
+     * @deprecated Use unserialize() instead
      */
     public function __unserialize(array $data): void
     {
         $this->value = $data['value'];
         $this->format = $data['format'];
-    }
-
-    /**
-     * @deprecated Use __serialize() instead
-     */
-    public function serialize()
-    {
-        return \serialize($this->__serialize());
-    }
-
-    /**
-     * @deprecated Use __unserialize() instead
-     */
-    public function unserialize($data)
-    {
-        $this->__unserialize(\unserialize($data));
     }
 
     /**
